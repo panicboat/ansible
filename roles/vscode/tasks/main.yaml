@@ -1,4 +1,4 @@
-- name: Create vscode setting directory
+- name: Create vscode directory
   ansible.builtin.file:
     path: "{{ vscode_workspace_location }}/{{ item }}"
     state: directory
