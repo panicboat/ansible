@@ -1,0 +1,17 @@
+- name: upgrade all casks
+  community.general.homebrew_cask:
+    upgrade_all: true
+
+  # https://formulae.brew.sh/cask/
+- name: install homebrew cask packages
+  community.general.homebrew_cask:
+    name:
+      - 1password
+      - cheatsheet
+      - clipy
+      - github
+      - google-chrome
+      - orbstack
+      - raycast
+      - slack
+      - visual-studio-code

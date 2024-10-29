@@ -1,0 +1,27 @@
+---
+- name: set up
+  hosts: localhost
+  connection: local
+  gather_facts: no
+
+  tasks:
+    - name: Create config directory
+      ansible.builtin.file:
+        path: ~/.config
+        state: directory
+
+  roles:
+    - geerlingguy.dotfiles
+    - vscode
+    - homebrew
+    - homebrew_cask
+    - mac_app_store
+
+  vars:
+    dotfiles_repo: "git@github.com:panicboat/dotfiles.git"
+    dotfiles_repo_version: main
+    dotfiles_files:
+      - .gitconfig
+      - .zshrc
+      - .config/starship.toml
+    dotfiles_repo_local_destination: "{{ vscode_workspace_location }}/dotfiles"

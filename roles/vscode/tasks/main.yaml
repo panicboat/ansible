@@ -1,0 +1,28 @@
+- name: Create vscode setting directory
+  ansible.builtin.file:
+    path: "{{ vscode_workspace_location }}/{{ item }}"
+    state: directory
+  with_items:
+    - .vscode
+    - workspaces/scripts
+
+- name: Copy vscode settings
+  ansible.builtin.copy:
+    src: ".vscode/{{ item }}"
+    dest: "{{ vscode_workspace_location }}/.vscode/{{ item }}"
+  with_items:
+    - settings.json
+
+- name: Copy scripts files
+  ansible.builtin.copy:
+    src: "workspaces/{{ item }}"
+    dest: "{{ vscode_workspace_location }}/workspaces/{{ item }}"
+  with_items:
+    - scripts/git-branch-clean.sh
+
+- name: Copy template files
+  ansible.builtin.template:
+    src: "workspaces/{{ item }}.j2"
+    dest: "{{ vscode_workspace_location }}/workspaces/{{ item }}"
+  with_items:
+    - sample.sh
