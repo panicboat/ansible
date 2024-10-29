@@ -1,0 +1,9 @@
+- name: upgrade applications from app store
+  community.general.mas:
+    upgrade_all: true
+
+- name: install applications from app store
+  community.general.mas:
+    id:
+      - 441258766 # Magnet
+      - 1429033973 # RunCat

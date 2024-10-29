@@ -1,0 +1,32 @@
+- name: update homebrew
+  community.general.homebrew:
+    update_homebrew: true
+
+- name: upgrade homebrew
+  community.general.homebrew:
+    upgrade_all: true
+
+- name: install homebrew packages
+  community.general.homebrew:
+    name:
+      - awscli
+      - bat
+      - eza
+      - font-fira-code-nerd-font
+      - gh
+      - git
+      - git-delta
+      - goenv
+      - jnv
+      - jq
+      - kubectl
+      - kustomize
+      - mas
+      - nvm
+      - starship
+      - trash-cli
+      - rbenv
+      - yq
+      - zsh-autosuggestions
+      - zsh-completions
+      - zsh-syntax-highlighting
