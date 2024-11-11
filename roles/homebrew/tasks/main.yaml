@@ -12,7 +12,7 @@
       - awscli
       - bat
       - eza
-      - font-fira-code-nerd-font
+      - font-hack-nerd-font
       - gh
       - git
       - git-delta
@@ -23,6 +23,7 @@
       - kustomize
       - mas
       - nvm
+      - peco
       - starship
       - trash-cli
       - rbenv
