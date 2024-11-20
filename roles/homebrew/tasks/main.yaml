@@ -22,7 +22,7 @@
       - kubectl
       - kustomize
       - mas
-      - nvm
+      - nodenv
       - peco
       - starship
       - trash-cli
