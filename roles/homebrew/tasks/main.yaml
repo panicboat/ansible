@@ -9,6 +9,7 @@
 - name: install homebrew packages
   community.general.homebrew:
     name:
+      - argo
       - awscli
       - bat
       - eza
