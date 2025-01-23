@@ -12,17 +12,21 @@
       - argo
       - awscli
       - bat
+      - docker
+      - docker-compose
       - eza
       - font-hack-nerd-font
       - gh
       - git
       - git-delta
       - goenv
+      # - hyperkit
       - jnv
       - jq
       - kubectl
       - kustomize
       - mas
+      - minikube
       - nodenv
       - peco
       - pyenv
