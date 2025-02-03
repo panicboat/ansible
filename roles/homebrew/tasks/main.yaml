@@ -12,6 +12,8 @@
       - argo
       - awscli
       - bat
+      - docker
+      - docker-compose
       - eza
       - font-hack-nerd-font
       - gh
@@ -23,8 +25,10 @@
       - kubectl
       - kustomize
       - mas
+      - minikube
       - nodenv
       - peco
+      - podman
       - pyenv
       - starship
       - trash-cli
@@ -33,3 +37,26 @@
       - zsh-autosuggestions
       - zsh-completions
       - zsh-syntax-highlighting
+
+- name: delete minikube
+  shell: minikube delete
+
+- name: delete virtual machine
+  shell: podman machine reset -f
+
+- name: initialize virtual machine
+  shell: podman machine init --cpus 4 --memory 8192 --rootful
+
+- name: start virtual machine
+  shell: podman machine start
+  register: start_podman
+
+- name: start minikube
+  shell: minikube start --driver=podman --network-plugin=cni --cni=calico
+
+- name: set minikube docker environment
+  shell: eval $(minikube -p minikube docker-env)
+
+- name: show podman start messages
+  debug:
+    msg: "{{ start_podman.stdout_lines }}"
