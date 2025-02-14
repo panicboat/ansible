@@ -12,8 +12,8 @@
       - argo
       - awscli
       - bat
-      - docker
-      - docker-compose
+      # - docker
+      # - docker-compose
       - eza
       - font-hack-nerd-font
       - gh
@@ -25,10 +25,10 @@
       - kubectl
       - kustomize
       - mas
-      - minikube
+      # - minikube
       - nodenv
       - peco
-      - podman
+      # - podman
       - pyenv
       - starship
       - trash-cli
