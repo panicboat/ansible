@@ -8,8 +8,9 @@
     name:
       - 1password
       - cheatsheet
+      # - claude
       - clipy
-      - cursor
+      # - cursor
       - docker
       - github
       - google-chrome
