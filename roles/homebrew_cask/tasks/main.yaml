@@ -15,6 +15,7 @@
       - github
       - google-chrome
       - google-cloud-sdk
+      - poe
       - raycast
       - slack
       - visual-studio-code
