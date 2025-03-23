@@ -31,6 +31,7 @@
       - peco
       - pyenv
       - starship
+      - tfenv
       - trash-cli
       - rbenv
       - yq
