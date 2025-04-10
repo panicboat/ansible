@@ -18,9 +18,7 @@
       - font-hack-nerd-font
       - gh
       - git
-      - git-delta
       - goenv
-      # - hyperkit
       - jnv
       - jq
       - kubectl
@@ -30,6 +28,7 @@
       - nodenv
       - peco
       - pyenv
+      - shellcheck
       - starship
       - tfenv
       - trash-cli

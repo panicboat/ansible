@@ -8,14 +8,11 @@
     name:
       - 1password
       - cheatsheet
-      # - claude
       - clipy
-      # - cursor
       - docker
       - github
       - google-chrome
       - google-cloud-sdk
-      # - poe
       - raycast
       - slack
       - visual-studio-code
