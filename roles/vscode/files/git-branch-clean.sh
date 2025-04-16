@@ -9,6 +9,6 @@ do
   echo "$i => ${list[$i]}"
   cd ${list[$i]}
   git switch $(git symbolic-ref refs/remotes/origin/HEAD | cut -f4 -d'/')
-  # git branch | grep -v "main\|master\|develop" | xargs git branch -D
+  git branch | grep -v "main\|master\|develop\|*" | xargs git branch -D
   git pull origin
 done
