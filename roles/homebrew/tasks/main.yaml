@@ -6,6 +6,10 @@
   community.general.homebrew:
     upgrade_all: true
 
+- name: Add fluxcd tap
+  homebrew_tap:
+    name: fluxcd/tap
+
 - name: install homebrew packages
   community.general.homebrew:
     name:
@@ -14,16 +18,17 @@
       - bat
       - docker-compose
       - eza
+      - fluxcd/tap/flux
       - font-hack-nerd-font
       - gh
       - git
       - goenv
       - jnv
       - jq
+      - kind
       - kubectl
       - kustomize
       - mas
-      - minikube
       - nodenv
       - peco
       - pyenv
