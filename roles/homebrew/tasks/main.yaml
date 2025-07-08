@@ -19,7 +19,6 @@
       - docker-compose
       - eza
       - fluxcd/tap/flux
-      - font-hack-nerd-font
       - gh
       - git
       - goenv
