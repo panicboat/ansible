@@ -16,6 +16,7 @@
       - argo
       - awscli
       - bat
+      - cilium-cli
       - docker-compose
       - eza
       - fluxcd/tap/flux
@@ -24,7 +25,8 @@
       - goenv
       - jnv
       - jq
-      - kind
+      - k3d
+      - k9s
       - kubectl
       - kustomize
       - mas
