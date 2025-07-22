@@ -23,6 +23,8 @@
       - gh
       - git
       - goenv
+      - helm
+      - helmfile
       - jnv
       - jq
       - k3d
