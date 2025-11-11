@@ -17,6 +17,8 @@
       - awscli
       - bat
       - cilium-cli
+      - colima
+      - docker
       - docker-compose
       - eza
       - fluxcd/tap/flux
