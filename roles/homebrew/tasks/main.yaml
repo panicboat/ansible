@@ -43,6 +43,7 @@
       - tfenv
       - trash-cli
       - rbenv
+      - yarn
       - yq
       - zsh-autosuggestions
       - zsh-completions
