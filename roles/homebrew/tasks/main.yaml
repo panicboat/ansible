@@ -37,6 +37,7 @@
       - mas
       - nodenv
       - peco
+      - postgresql # For local development
       - pyenv
       - shellcheck
       - starship
