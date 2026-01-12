@@ -2,3 +2,4 @@
 ansible_become=true
 ansible_become_user=panicboat
 vscode_workspace_location=~/GitHub/panicboat
+ansible_python_interpreter=/opt/homebrew/bin/python3
