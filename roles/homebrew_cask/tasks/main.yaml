@@ -1,6 +1,7 @@
 - name: upgrade all casks
   community.general.homebrew_cask:
     upgrade_all: true
+  ignore_errors: true
 
   # https://formulae.brew.sh/cask/
 - name: install homebrew cask packages

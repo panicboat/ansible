@@ -1,10 +1,12 @@
 - name: update homebrew
   community.general.homebrew:
     update_homebrew: true
+  ignore_errors: true
 
 - name: upgrade homebrew
   community.general.homebrew:
     upgrade_all: true
+  ignore_errors: true
 
 - name: Add fluxcd tap
   homebrew_tap:
