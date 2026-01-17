@@ -18,6 +18,7 @@
       - argo
       - awscli
       - bat
+      - buf
       - cilium-cli
       - colima
       - docker
