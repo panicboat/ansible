@@ -16,6 +16,7 @@
       - github
       - google-chrome
       - google-cloud-sdk
+      - logi-options+
       - raycast
       - slack
       - visual-studio-code
