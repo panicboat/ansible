@@ -16,6 +16,7 @@
   community.general.homebrew:
     name:
       - argo
+      - aqua
       - awscli
       - bat
       - buf
