@@ -24,4 +24,4 @@
       - .gitconfig
       - .zshrc
       - .config/starship.toml
-    dotfiles_repo_local_destination: "{{ vscode_workspace_location }}/dotfiles"
+      - .claude/CLAUDE.md
