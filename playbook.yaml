@@ -13,6 +13,7 @@
   roles:
     - geerlingguy.dotfiles
     - vscode
+    - crontab
     - homebrew
     - homebrew_cask
     - mac_app_store
