@@ -9,7 +9,7 @@
   ignore_errors: true
 
 - name: Add fluxcd tap
-  homebrew_tap:
+  community.general.homebrew_tap:
     name: fluxcd/tap
 
 - name: install homebrew packages
@@ -53,3 +53,7 @@
       - zsh-autosuggestions
       - zsh-completions
       - zsh-syntax-highlighting
+
+- name: link docker
+  command: brew link docker
+  changed_when: false
