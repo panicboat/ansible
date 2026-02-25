@@ -8,7 +8,8 @@ for i in "${!list[@]}"
 do
   echo "$i => ${list[$i]}"
   cd ${list[$i]}
-  git switch $(git symbolic-ref refs/remotes/origin/HEAD | cut -f4 -d'/')
+  git checkout -f $(git symbolic-ref refs/remotes/origin/HEAD | cut -f4 -d'/')
+  git clean -fd
   git branch | grep -v "main\|master\|develop\|*" | xargs git branch -D
   git pull origin
 done
