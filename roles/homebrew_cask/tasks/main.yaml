@@ -12,7 +12,7 @@
       - claude
       - claude-code
       - clipy
-      - codex
+      # - codex
       - github
       - google-chrome
       - google-cloud-sdk
