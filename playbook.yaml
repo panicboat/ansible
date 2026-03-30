@@ -26,3 +26,4 @@
       - .zshrc
       - .config/starship.toml
       - .claude/CLAUDE.md
+      - .claude/settings.json
