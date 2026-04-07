@@ -4,3 +4,5 @@ dotfiles_repo_version: main
 dotfiles_exclude:
   - README.md
   - LICENSE
+dotfiles_executable_dirs:
+  - .claude/scripts
