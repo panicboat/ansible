@@ -1,0 +1,6 @@
+---
+dotfiles_repo: "git@github.com:panicboat/dotfiles.git"
+dotfiles_repo_version: main
+dotfiles_exclude:
+  - README.md
+  - LICENSE
