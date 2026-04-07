@@ -1,31 +1,17 @@
 ---
-- name: Check if dotfiles repository exists
-  ansible.builtin.stat:
-    path: ~/dotfiles
-  register: dotfiles_dir
-
-- name: Clone dotfiles repository
+- name: Clone or update dotfiles repository
   ansible.builtin.git:
     repo: "{{ dotfiles_repo }}"
     dest: ~/dotfiles
     version: "{{ dotfiles_repo_version }}"
     accept_hostkey: true
-  when: not dotfiles_dir.stat.exists
-
-- name: Pull dotfiles repository
-  ansible.builtin.git:
-    repo: "{{ dotfiles_repo }}"
-    dest: ~/dotfiles
-    version: "{{ dotfiles_repo_version }}"
-    accept_hostkey: true
-  when: dotfiles_dir.stat.exists
 
 - name: Find all dotfiles
   ansible.builtin.shell: >
     find ~/dotfiles -type f
     -not -path '*/\.git/*'
     {% for exclude in dotfiles_exclude %}
-    -not -name '{{ exclude }}'
+    -not -name {{ exclude | quote }}
     {% endfor %}
     | sed 's|^.*/dotfiles/||'
   register: dotfiles_found
