@@ -2,18 +2,18 @@
 - name: Clone or update dotfiles repository
   ansible.builtin.git:
     repo: "{{ dotfiles_repo }}"
-    dest: ~/dotfiles
+    dest: "{{ dotfiles_repo_local_destination }}"
     version: "{{ dotfiles_repo_version }}"
     accept_hostkey: true
 
 - name: Find all dotfiles
   ansible.builtin.shell: >
-    find ~/dotfiles -type f
+    cd {{ dotfiles_repo_local_destination }} && find . -type f
     -not -path '*/\.git/*'
     {% for exclude in dotfiles_exclude %}
     -not -name {{ exclude | quote }}
     {% endfor %}
-    | sed 's|^.*/dotfiles/||'
+    | sed 's|^\./||'
   register: dotfiles_found
   changed_when: false
 
@@ -30,7 +30,7 @@
 
 - name: Find files in executable directories
   ansible.builtin.find:
-    paths: "~/dotfiles/{{ item }}"
+    paths: "{{ dotfiles_repo_local_destination }}/{{ item }}"
     recurse: true
     file_type: file
   with_items: "{{ dotfiles_executable_dirs }}"
