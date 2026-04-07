@@ -6,6 +6,13 @@
     version: "{{ dotfiles_repo_version }}"
     accept_hostkey: true
 
+- name: Ignore file mode changes in dotfiles repository
+  community.general.git_config:
+    name: core.fileMode
+    scope: local
+    repo: "{{ dotfiles_repo_local_destination }}"
+    value: "false"
+
 - name: Find all dotfiles
   ansible.builtin.shell: >
     cd {{ dotfiles_repo_local_destination }} && find . -type f
