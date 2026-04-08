@@ -11,5 +11,7 @@ do
   git checkout -f $(git symbolic-ref refs/remotes/origin/HEAD | cut -f4 -d'/')
   git clean -fd
   git branch | grep -v "main\|master\|develop\|*" | xargs git branch -D
+  git worktree list --porcelain | awk '/^worktree /{print $2}' | grep -v "^${list[$i]}$" | xargs -I{} git worktree remove --force {}
+  git worktree prune
   git pull origin
 done
