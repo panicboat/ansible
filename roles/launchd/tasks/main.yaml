@@ -1,0 +1,52 @@
+- name: Remove legacy cron entries
+  ansible.builtin.cron:
+    name: "{{ item }}"
+    state: absent
+  loop:
+    - homebrew update
+    - homebrew upgrade
+    - homebrew cask upgrade
+
+- name: Ensure LaunchAgents directory exists
+  ansible.builtin.file:
+    path: "{{ lookup('env','HOME') }}/Library/LaunchAgents"
+    state: directory
+    mode: "0755"
+
+- name: Install homebrew upgrade LaunchAgent
+  ansible.builtin.copy:
+    dest: "{{ lookup('env','HOME') }}/Library/LaunchAgents/local.homebrew.upgrade.plist"
+    mode: "0644"
+    content: |
+      <?xml version="1.0" encoding="UTF-8"?>
+      <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+      <plist version="1.0">
+      <dict>
+          <key>Label</key>
+          <string>local.homebrew.upgrade</string>
+          <key>ProgramArguments</key>
+          <array>
+              <string>/bin/zsh</string>
+              <string>-lc</string>
+              <string>/opt/homebrew/bin/brew update &amp;&amp; /opt/homebrew/bin/brew upgrade &amp;&amp; /opt/homebrew/bin/brew upgrade --cask</string>
+          </array>
+          <key>StartCalendarInterval</key>
+          <dict>
+              <key>Hour</key>
+              <integer>8</integer>
+              <key>Minute</key>
+              <integer>0</integer>
+          </dict>
+          <key>StandardOutPath</key>
+          <string>/tmp/homebrew.upgrade.log</string>
+          <key>StandardErrorPath</key>
+          <string>/tmp/homebrew.upgrade.log</string>
+      </dict>
+      </plist>
+  register: brew_upgrade_plist
+
+- name: Reload homebrew upgrade LaunchAgent
+  ansible.builtin.shell: |
+    launchctl unload "{{ lookup('env','HOME') }}/Library/LaunchAgents/local.homebrew.upgrade.plist" 2>/dev/null || true
+    launchctl load "{{ lookup('env','HOME') }}/Library/LaunchAgents/local.homebrew.upgrade.plist"
+  when: brew_upgrade_plist.changed

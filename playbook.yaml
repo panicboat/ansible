@@ -11,7 +11,7 @@
     - dotfiles
     - geerlingguy.dotfiles
     - vscode
-    - crontab
+    - launchd
     - homebrew
     - homebrew_cask
     - mac_app_store
