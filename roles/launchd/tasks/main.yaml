@@ -1,12 +1,3 @@
-- name: Remove legacy cron entries
-  ansible.builtin.cron:
-    name: "{{ item }}"
-    state: absent
-  loop:
-    - homebrew update
-    - homebrew upgrade
-    - homebrew cask upgrade
-
 - name: Ensure LaunchAgents directory exists
   ansible.builtin.file:
     path: "{{ lookup('env','HOME') }}/Library/LaunchAgents"
