@@ -41,3 +41,43 @@
     launchctl unload "{{ lookup('env','HOME') }}/Library/LaunchAgents/local.homebrew.upgrade.plist" 2>/dev/null || true
     launchctl load "{{ lookup('env','HOME') }}/Library/LaunchAgents/local.homebrew.upgrade.plist"
   when: brew_upgrade_plist.changed
+
+- name: Install claude optimize LaunchAgent
+  ansible.builtin.copy:
+    dest: "{{ lookup('env','HOME') }}/Library/LaunchAgents/local.claude.optimize.plist"
+    mode: "0644"
+    content: |
+      <?xml version="1.0" encoding="UTF-8"?>
+      <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+      <plist version="1.0">
+      <dict>
+          <key>Label</key>
+          <string>local.claude.optimize</string>
+          <key>ProgramArguments</key>
+          <array>
+              <string>/bin/zsh</string>
+              <string>-lc</string>
+              <string>/opt/homebrew/bin/claude --print "$(cat $HOME/GitHub/panicboat/dotfiles/.claude/scripts/optimize-agent.md)"</string>
+          </array>
+          <key>StartCalendarInterval</key>
+          <dict>
+              <key>Weekday</key>
+              <integer>1</integer>
+              <key>Hour</key>
+              <integer>9</integer>
+              <key>Minute</key>
+              <integer>3</integer>
+          </dict>
+          <key>StandardOutPath</key>
+          <string>/tmp/claude.optimize.log</string>
+          <key>StandardErrorPath</key>
+          <string>/tmp/claude.optimize.log</string>
+      </dict>
+      </plist>
+  register: claude_optimize_plist
+
+- name: Reload claude optimize LaunchAgent
+  ansible.builtin.shell: |
+    launchctl unload "{{ lookup('env','HOME') }}/Library/LaunchAgents/local.claude.optimize.plist" 2>/dev/null || true
+    launchctl load "{{ lookup('env','HOME') }}/Library/LaunchAgents/local.claude.optimize.plist"
+  when: claude_optimize_plist.changed
