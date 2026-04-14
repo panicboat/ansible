@@ -57,7 +57,7 @@
           <array>
               <string>/bin/zsh</string>
               <string>-lc</string>
-              <string>/opt/homebrew/bin/claude --print "$(cat $HOME/GitHub/panicboat/dotfiles/.claude/scripts/optimize-agent.md)"</string>
+              <string>DOTFILES="$(dirname "$(dirname "$(readlink "$HOME/.claude/CLAUDE.md")")")"; /opt/homebrew/bin/claude --print "$(cat "$DOTFILES/.claude/scripts/optimize-agent.md")"</string>
           </array>
           <key>StartCalendarInterval</key>
           <dict>
