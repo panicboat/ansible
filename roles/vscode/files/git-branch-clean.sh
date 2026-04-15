@@ -30,6 +30,11 @@ do
 
   git checkout -f "$default_branch"
   git clean -fd
+  git worktree list --porcelain | grep "^worktree " | awk 'NR>1{print $2}' | while IFS= read -r wt_path; do
+    echo "Removing worktree: $wt_path"
+    git worktree remove --force "$wt_path" || true
+  done
+  git worktree prune
   git branch | grep -vE "^\s*[*+]|$default_branch" | xargs git branch -D || true
   git pull origin "$default_branch"
 done
