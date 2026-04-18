@@ -40,6 +40,7 @@
       - kustomize
       - mas
       - nodenv
+      - opentofu
       - peco
       - postgresql # For local development
       - pyenv
