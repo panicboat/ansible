@@ -1,1 +1,4 @@
 inventory.ini
+
+# Git worktrees
+.claude/worktrees/
