@@ -1,0 +1,6 @@
+- name: Copy scripts files
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: "{{ workspace_location }}/{{ item }}"
+  with_items:
+    - git-branch-clean.sh

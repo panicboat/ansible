@@ -10,7 +10,7 @@
   roles:
     - dotfiles
     - geerlingguy.dotfiles
-    - vscode
+    - scripts
     - launchd
     - homebrew
     - homebrew_cask
