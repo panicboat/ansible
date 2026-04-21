@@ -17,6 +17,24 @@ done
 
 working_dir="$(cd "$(dirname "$0")"; pwd)"
 
+ignore_patterns=()
+if [ -f "$working_dir/.git-branch-clean-ignore" ]; then
+  while IFS= read -r line || [ -n "$line" ]; do
+    [[ "$line" =~ ^[[:space:]]*$ ]] && continue
+    [[ "$line" =~ ^# ]] && continue
+    ignore_patterns+=("$line")
+  done < "$working_dir/.git-branch-clean-ignore"
+fi
+
+is_ignored() {
+  local relpath="${1#"$working_dir/"}"
+  local pattern
+  for pattern in "${ignore_patterns[@]+"${ignore_patterns[@]}"}"; do
+    [[ "$relpath" == $pattern ]] && return 0
+  done
+  return 1
+}
+
 clean_repo() {
   local dir="$1"
   echo "$dir"
@@ -52,6 +70,11 @@ clean_repo() {
 process_repos() {
   local dir="$1"
   local depth="$2"
+
+  if is_ignored "$dir"; then
+    echo "Skipping: $dir (ignored)"
+    return
+  fi
 
   if [ -d "$dir/.git" ]; then
     clean_repo "$dir" || echo "Warning: failed to clean $dir" >&2
