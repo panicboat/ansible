@@ -10,8 +10,8 @@
 ./git-branch-clean.sh [--max-depth N]
 ```
 
-- `--max-depth N`: 探索の最大深さ（デフォルト: 3）
-- 引数なしで実行した場合は `--max-depth 3` と同等
+- `--max-depth N`: 探索の最大深さ（デフォルト: 2）
+- 引数なしで実行した場合は `--max-depth 2` と同等
 
 ## Architecture
 
@@ -20,7 +20,7 @@
 ```
 git-branch-clean.sh
 ├── 引数パース
-│   └── --max-depth（デフォルト 3）
+│   └── --max-depth（デフォルト 2）
 ├── clean_repo(dir)
 │   └── 既存の処理ロジック（stale lock 削除、branch cleanup、pull）
 ├── process_repos(dir, remaining_depth)
@@ -52,6 +52,6 @@ git-branch-clean.sh
 | 項目 | 変更前 | 変更後 |
 |---|---|---|
 | 探索範囲 | `find -mindepth 1 -maxdepth 1`（直下のみ）| 再帰関数で任意深さまで探索 |
-| 深さ制御 | なし | `--max-depth N`（デフォルト 3）|
+| 深さ制御 | なし | `--max-depth N`（デフォルト 2）|
 | スクリプト配置ディレクトリ自身 | スキップ | `.git` があれば処理対象 |
 | ネストした git repo | 非対応 | 発見したら処理して内部は探索しない |
