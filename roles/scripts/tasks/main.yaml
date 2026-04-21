@@ -9,7 +9,11 @@
   ansible.builtin.copy:
     src: "{{ item }}"
     dest: "{{ workspace_location }}/{{ item }}"
-    force: no
   with_items:
     - git-branch-clean.sh
-    - .git-branch-clean-ignore
+
+- name: Initialize .git-branch-clean-ignore if absent
+  ansible.builtin.copy:
+    src: .git-branch-clean-ignore
+    dest: "{{ workspace_location }}/.git-branch-clean-ignore"
+    force: no
