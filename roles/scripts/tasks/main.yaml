@@ -1,9 +1,8 @@
-- name: Create vscode directory
+- name: Create scripts directory
   ansible.builtin.file:
     path: "{{ workspace_location }}/{{ item }}"
     state: directory
-  with_items:
-    - .vscode
+  with_items: []
 
 - name: Copy scripts files
   ansible.builtin.copy:
