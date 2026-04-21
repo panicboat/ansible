@@ -29,6 +29,7 @@ fi
 is_ignored() {
   local relpath="${1#"$working_dir/"}"
   local pattern
+  # bash 3.x: "${array[@]+"${array[@]}"}" avoids "unbound variable" under set -u for empty arrays
   for pattern in "${ignore_patterns[@]+"${ignore_patterns[@]}"}"; do
     [[ "$relpath" == $pattern ]] && return 0
   done
