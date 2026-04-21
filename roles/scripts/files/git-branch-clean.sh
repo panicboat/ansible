@@ -44,7 +44,9 @@ clean_repo() {
   done
   git worktree prune
   git branch | grep -vE "^\s*[*+]|$default_branch" | xargs git branch -D || true
-  git pull origin "$default_branch"
+  if ! git pull origin "$default_branch"; then
+    echo "Warning: git pull failed for $dir" >&2
+  fi
 }
 
 process_repos() {
@@ -52,7 +54,7 @@ process_repos() {
   local depth="$2"
 
   if [ -d "$dir/.git" ]; then
-    clean_repo "$dir"
+    clean_repo "$dir" || echo "Warning: failed to clean $dir" >&2
     return
   fi
 
