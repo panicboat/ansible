@@ -62,7 +62,7 @@ process_repos() {
 
   for subdir in "$dir"/*/; do
     if [ -d "$subdir" ]; then
-      process_repos "$subdir" "$((depth - 1))"
+      process_repos "${subdir%/}" "$((depth - 1))"
     fi
   done
 }
