@@ -94,7 +94,43 @@ git commit -s -m "Add tmux and ghostty, remove iterm2"
 
 ---
 
-### Task 2: PR を Draft で作成する
+### Task 2: worktree で playbook を実行してローカル動作確認する
+
+**Files:**（変更なし。ローカル環境への作用のみ）
+
+- [ ] **Step 1: worktree から playbook を実行する**
+
+`inventory.ini` は本体の既存ファイルを絶対パスで参照する:
+
+```bash
+cd /Users/takanokenichi/GitHub/panicboat/ansible/.claude/worktrees/add-ghostty-tmux
+ansible-playbook -i /Users/takanokenichi/GitHub/panicboat/ansible/inventory.ini playbook.yaml
+```
+
+期待結果: エラーなく完了する。`homebrew` ロールで `tmux` がインストール、`homebrew_cask` ロールで `ghostty` がインストールされ、`iterm2` がアンインストールされる。
+
+- [ ] **Step 2: パッケージ導入を確認する**
+
+```bash
+tmux -V
+which ghostty
+ls /Applications/iTerm.app 2>&1 || echo "iTerm.app removed (OK)"
+```
+
+期待結果:
+- `tmux 3.x` 系のバージョン表示
+- `/opt/homebrew/bin/ghostty` 等のパス表示
+- `iTerm.app removed (OK)` または `No such file or directory`
+
+- [ ] **Step 3: Ghostty/tmux をデフォルト設定で起動確認する**
+
+Launchpad / Spotlight から Ghostty を起動。デフォルトの色・フォントで zsh + starship が表示されること。Ghostty 内で `tmux` を起動してプロンプトが出ることを確認。
+
+ここまでで Phase 1 のローカル動作は完了。Ghostty/tmux はインストール済み・設定なしの状態。
+
+---
+
+### Task 3: ブランチを push して PR を作成する（またはマージする）
 
 **Files:**（変更なし）
 
@@ -117,7 +153,7 @@ gh pr create --draft --title "Add tmux and ghostty, remove iterm2" --body "$(cat
 - Homebrew Cask から `iterm2` を削除し `ghostty` を追加
 - iTerm2 を `state: absent` でアンインストールするタスクを追加
 
-設定ファイルは別途 dotfiles リポジトリで追加する（design spec の Rollout Order に従う）。
+ローカルで `ansible-playbook` を実行してパッケージ導入を確認済み。設定ファイルは別途 dotfiles リポジトリで追加する（design spec の Rollout Order に従う）。
 
 ## Spec
 
@@ -125,64 +161,18 @@ gh pr create --draft --title "Add tmux and ghostty, remove iterm2" --body "$(cat
 
 ## Test plan
 
-- [ ] `ansible-playbook -i inventory.ini playbook.yaml` を実行
-- [ ] `tmux -V` で tmux が利用可能
-- [ ] `which ghostty` で Ghostty が利用可能
-- [ ] `/Applications/iTerm.app` が削除されている
-- [ ] Ghostty を起動してデフォルト設定で動作する
+- [x] `ansible-playbook -i inventory.ini playbook.yaml` をローカル実行
+- [x] `tmux -V` で tmux が利用可能
+- [x] `which ghostty` で Ghostty が利用可能
+- [x] `/Applications/iTerm.app` が削除されている
+- [x] Ghostty を起動してデフォルト設定で動作する
 EOF
 )"
 ```
 
-- [ ] **Step 3: PR URL を確認する**
+- [ ] **Step 3: PR URL を確認してユーザーに報告する**
 
-`gh pr create` の出力に表示される PR URL をユーザーに報告する。
-
----
-
-### Task 3: PR マージ後に playbook を実行してパッケージ導入を確認する
-
-**Files:**（変更なし。ローカル環境への作用のみ）
-
-- [ ] **Step 1: ユーザーが PR をレビュー・マージする（手動）**
-
-以下を促す:
-- PR をレビューして問題なければ Ready for review に変更してマージする
-- マージ後、ローカルの ansible 本体（worktree ではなく `/Users/takanokenichi/GitHub/panicboat/ansible/`）で main を pull する
-
-```bash
-cd /Users/takanokenichi/GitHub/panicboat/ansible
-git checkout main
-git pull origin main
-```
-
-- [ ] **Step 2: ansible-playbook を実行する**
-
-```bash
-cd /Users/takanokenichi/GitHub/panicboat/ansible
-ansible-playbook -i inventory.ini playbook.yaml
-```
-
-期待結果: エラーなく完了する。`homebrew_cask` ロールで `ghostty` のインストールと `iterm2` の削除が成功する。
-
-- [ ] **Step 3: 導入を確認する**
-
-```bash
-tmux -V
-which ghostty
-ls /Applications/iTerm.app 2>&1 || echo "iTerm.app removed (OK)"
-```
-
-期待結果:
-- `tmux 3.x` 系のバージョン表示
-- `/opt/homebrew/bin/ghostty` 等のパス表示
-- `iTerm.app removed (OK)` または `No such file or directory`
-
-- [ ] **Step 4: Ghostty をデフォルト設定で起動して動作確認する**
-
-Launchpad / Spotlight から Ghostty を起動。デフォルトの色・フォントで zsh + starship が表示されること。tmux も起動 (`tmux`) してプロンプトが出ることを確認。
-
-ここまでで Phase 1 は完了。Ghostty/tmux はインストール済み・設定なしの状態。
+`gh pr create` の出力に表示される PR URL をユーザーに伝える。マージは Phase 2 の作業と並行して任意のタイミングで実行可能。
 
 ---
 
