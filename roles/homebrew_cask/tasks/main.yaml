@@ -18,7 +18,6 @@
       - google-cloud-sdk
       - iterm2
       # - logi-options+
-      - muxy
       - raycast
       - slack
       - visual-studio-code

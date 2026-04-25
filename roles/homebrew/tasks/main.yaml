@@ -12,10 +12,6 @@
   community.general.homebrew_tap:
     name: fluxcd/tap
 
-- name: Add muxy-app tap
-  community.general.homebrew_tap:
-    name: muxy-app/tap
-
 - name: install homebrew packages
   community.general.homebrew:
     name:
