@@ -13,11 +13,17 @@
       - claude-code
       - clipy
       # - codex
+      - ghostty
       - github
       - google-chrome
       - google-cloud-sdk
-      - iterm2
       # - logi-options+
       - raycast
       - slack
       - visual-studio-code
+
+- name: uninstall iterm2
+  community.general.homebrew_cask:
+    name: iterm2
+    state: absent
+  ignore_errors: true
