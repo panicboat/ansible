@@ -73,20 +73,16 @@
 
 - [ ] **Step 4: Ansible 構文チェックを実行する**
 
-worktree 直下で実行する:
+worktree 直下で実行する。`hosts: localhost` の playbook なので `-i inventory.ini` は不要:
 
 ```bash
 cd /Users/takanokenichi/GitHub/panicboat/ansible/.claude/worktrees/add-ghostty-tmux
-ansible-playbook -i inventory.ini playbook.yaml --syntax-check
+ansible-playbook playbook.yaml --syntax-check
 ```
 
-期待結果: `playbook: playbook.yaml` と表示されエラーなく完了する。
+期待結果: `playbook: playbook.yaml` と表示される（inventory 未指定の WARNING は出るが問題なし）。
 
-注: `inventory.ini` は `.gitignore` 対象。ローカルに無い場合は `inventory.ini.example` をコピーして作る:
-
-```bash
-cp inventory.ini.example inventory.ini
-```
+注: 実際の playbook 実行は Task 3 で本体ディレクトリ (`/Users/takanokenichi/GitHub/panicboat/ansible/`) の既存 `inventory.ini` を使って行う。worktree 内に `inventory.ini` を作る必要は無い。
 
 - [ ] **Step 5: コミットする**
 
