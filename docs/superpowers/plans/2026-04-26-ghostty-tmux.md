@@ -113,13 +113,13 @@ ansible-playbook -i /Users/takanokenichi/GitHub/panicboat/ansible/inventory.ini 
 
 ```bash
 tmux -V
-which ghostty
+ls -d /Applications/Ghostty.app 2>&1 && echo "Ghostty installed (OK)"
 ls /Applications/iTerm.app 2>&1 || echo "iTerm.app removed (OK)"
 ```
 
 期待結果:
 - `tmux 3.x` 系のバージョン表示
-- `/opt/homebrew/bin/ghostty` 等のパス表示
+- `/Applications/Ghostty.app` のパス表示と `Ghostty installed (OK)`（Ghostty は GUI アプリ cask なので `which ghostty` ではなく `/Applications/Ghostty.app` の存在で確認する）
 - `iTerm.app removed (OK)` または `No such file or directory`
 
 - [ ] **Step 3: Ghostty/tmux をデフォルト設定で起動確認する**
