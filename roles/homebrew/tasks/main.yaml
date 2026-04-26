@@ -47,6 +47,7 @@
       - shellcheck
       - starship
       - tfenv
+      - tmux
       - trash-cli
       - rbenv
       - yarn
