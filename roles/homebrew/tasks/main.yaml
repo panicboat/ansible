@@ -56,5 +56,9 @@
       - zsh-syntax-highlighting
 
 - name: link docker
-  command: brew link docker
+  command: brew link --overwrite docker
+  changed_when: false
+
+- name: link tfenv
+  command: brew link --overwrite tfenv
   changed_when: false
