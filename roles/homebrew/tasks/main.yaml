@@ -42,6 +42,7 @@
       - nodenv
       - opentofu
       - peco
+      - pnpm
       - postgresql # For local development
       - pyenv
       - shellcheck
