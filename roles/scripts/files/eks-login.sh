@@ -3,9 +3,13 @@
 # kubeconfig for the panicboat platform EKS cluster.
 #
 # Usage:
-#   source ./eks-login.sh [environment]
+#   source ./eks-login.sh [environment] [region]
 #
 # Default environment: production.
+# Region defaults are derived from environment to match workflow-config.yaml
+# in panicboat/platform (production -> ap-northeast-1, develop -> us-east-1).
+# For environments not listed below, region must be passed explicitly as 2nd arg.
+#
 # MUST be sourced (not executed) so that AWS_* env vars persist in the
 # parent shell. Session is valid for 1 hour (matches the role's
 # max_session_duration in aws/eks/modules/iam_admin.tf).
@@ -18,17 +22,30 @@
 
 if [ "${BASH_SOURCE[0]}" = "${0}" ]; then
   echo "ERROR: This script must be sourced, not executed." >&2
-  echo "Usage: source $(basename "$0") [environment]" >&2
+  echo "Usage: source $(basename "$0") [environment] [region]" >&2
   exit 1
 fi
 
 _env="${1:-production}"
-_region="ap-northeast-1"
+
+# Default region per environment matches workflow-config.yaml in
+# panicboat/platform. Add new envs here when creating develop/staging EKS.
+case "${_env}" in
+  production) _region="${2:-ap-northeast-1}" ;;
+  develop)    _region="${2:-us-east-1}" ;;
+  *)          _region="${2:-}" ;;
+esac
+
+if [ -z "${_region}" ]; then
+  echo "[eks-login] ERROR: unknown environment '${_env}', pass region as 2nd arg" >&2
+  unset _env _region
+  return 1
+fi
 
 _account_id=$(aws sts get-caller-identity --query 'Account' --output text)
 _role_arn="arn:aws:iam::${_account_id}:role/eks-admin-${_env}"
 
-echo "[eks-login] Assuming ${_role_arn}..."
+echo "[eks-login] Assuming ${_role_arn} in ${_region}..."
 _creds=$(aws sts assume-role \
   --role-arn "${_role_arn}" \
   --role-session-name "kubectl-${USER:-debug}" \
