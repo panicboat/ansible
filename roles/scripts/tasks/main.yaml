@@ -10,7 +10,6 @@
     dest: "{{ workspace_location }}/{{ item }}"
   with_items:
     - git-branch-clean.sh
-    - eks-login.sh
 
 - name: Initialize .git-branch-clean-ignore if absent
   ansible.builtin.copy:
