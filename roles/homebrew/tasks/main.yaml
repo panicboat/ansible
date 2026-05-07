@@ -15,47 +15,47 @@
 - name: install homebrew packages
   community.general.homebrew:
     name:
-      - act
-      - argo
-      - aqua
-      - awscli
-      - bat
-      - buf
-      - cilium-cli
-      - colima
-      - docker
-      - docker-compose
-      - eza
-      - fluxcd/tap/flux
-      - gh
-      - git
-      - goenv
-      - helm
-      - helmfile
-      - jnv
-      - jq
-      - k3d
-      - k9s
-      - kubectl
-      - kustomize
-      - mas
-      - nodenv
-      - opentofu
-      - peco
-      - pnpm
-      - postgresql # For local development
-      - pyenv
-      - shellcheck
-      - starship
-      - tfenv
-      - tmux
-      - trash-cli
-      - rbenv
-      - yarn
-      - yq
-      - zsh-autosuggestions
-      - zsh-completions
-      - zsh-syntax-highlighting
+      - act                     # Run GitHub Actions locally
+      - argo                    # CLI client for Argo Workflows
+      - aqua                    # Declarative CLI tool version manager
+      - awscli                  # AWS command-line interface
+      - bat                     # cat replacement with syntax highlighting
+      - buf                     # Build and lint tool for Protocol Buffers
+      - cilium-cli              # CLI for managing Cilium network policies on Kubernetes
+      - colima                  # Lightweight container runtime for macOS
+      - docker                  # Container management CLI
+      - docker-compose          # Define and run multi-container applications
+      - eza                     # Modern replacement for ls
+      - fluxcd/tap/flux         # GitOps continuous delivery tool for Kubernetes
+      - gh                      # GitHub CLI
+      - git                     # Version control system
+      - goenv                   # Go version manager
+      - helm                    # Kubernetes package manager
+      - helmfile                # Declarative Helm chart deployment manager
+      - jnv                     # Interactive JSON viewer and filter
+      - jq                      # Command-line JSON processor
+      - k3d                     # Run lightweight Kubernetes clusters on Docker
+      - k9s                     # TUI for managing Kubernetes clusters
+      - kubectl                 # CLI for Kubernetes cluster operations
+      - kustomize               # Kubernetes manifest customization tool
+      - mas                     # Mac App Store CLI
+      - nodenv                  # Node.js version manager
+      - opentofu                # Open-source Terraform-compatible IaC tool
+      - peco                    # Interactive filtering tool
+      - pnpm                    # Fast, disk-efficient Node.js package manager
+      - postgresql              # Relational database
+      - pyenv                   # Python version manager
+      - shellcheck              # Static analysis tool for shell scripts
+      - starship                # Cross-shell prompt customization tool
+      - tfenv                   # Terraform version manager
+      - tmux                    # Terminal multiplexer
+      - trash-cli               # Move files to trash instead of deleting
+      - rbenv                   # Ruby version manager
+      - yarn                    # Node.js package manager
+      - yq                      # Command-line YAML processor
+      - zsh-autosuggestions     # Fish-like autosuggestions for zsh
+      - zsh-completions         # Additional completion definitions for zsh
+      - zsh-syntax-highlighting # Fish-like syntax highlighting for zsh
 
 - name: link docker
   command: brew link --overwrite docker
