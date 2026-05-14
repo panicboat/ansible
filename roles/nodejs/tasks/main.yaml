@@ -16,4 +16,4 @@
   community.general.npm:
     name: "@evenrealities/even-terminal"
     global: true
-    executable: "{{ ansible_env.HOME }}/.nodenv/shims/npm"
+    executable: "{{ lookup('env', 'HOME') }}/.nodenv/shims/npm"
