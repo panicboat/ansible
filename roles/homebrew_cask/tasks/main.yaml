@@ -8,7 +8,6 @@
   community.general.homebrew_cask:
     name:
       - 1password
-      - cheatsheet
       - claude
       - claude-code
       - clipy
@@ -22,8 +21,10 @@
       - slack
       - visual-studio-code
 
-- name: uninstall iterm2
+- name: uninstall homebrew cask packages
   community.general.homebrew_cask:
-    name: iterm2
+    name:
+      - cheatsheet
+      - iterm2
     state: absent
   ignore_errors: true
