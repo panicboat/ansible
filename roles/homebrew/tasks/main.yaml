@@ -42,6 +42,7 @@
       - nodenv                  # Node.js version manager
       - opentofu                # Open-source Terraform-compatible IaC tool
       - peco                    # Interactive filtering tool
+      - pnpm                    # Fast, disk-efficient Node.js package manager
       - postgresql              # Relational database
       - pyenv                   # Python version manager
       - shellcheck              # Static analysis tool for shell scripts
