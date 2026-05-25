@@ -4,7 +4,7 @@
   ignore_errors: true
 
 - name: Add cmux tap
-  community.general.homebrew_cask_tap:
+  community.general.homebrew_tap:
     name: manaflow-ai/cmux
 
   # https://formulae.brew.sh/cask/
