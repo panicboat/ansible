@@ -3,6 +3,10 @@
     upgrade_all: true
   ignore_errors: true
 
+- name: Add cmux tap
+  community.general.homebrew_cask_tap:
+    name: manaflow-ai/cmux
+
   # https://formulae.brew.sh/cask/
 - name: install homebrew cask packages
   community.general.homebrew_cask:
@@ -11,8 +15,9 @@
       - claude
       - claude-code
       - clipy
+      - cmux
       # - codex
-      - ghostty
+      # - ghostty
       - github
       - google-chrome
       - google-cloud-sdk
@@ -25,6 +30,7 @@
   community.general.homebrew_cask:
     name:
       - cheatsheet
+      - ghostty
       - iterm2
     state: absent
   ignore_errors: true

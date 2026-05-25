@@ -48,7 +48,7 @@
       - shellcheck              # Static analysis tool for shell scripts
       - starship                # Cross-shell prompt customization tool
       - tfenv                   # Terraform version manager
-      - tmux                    # Terminal multiplexer
+      # - tmux                    # Terminal multiplexer
       - trash-cli               # Move files to trash instead of deleting
       - rbenv                   # Ruby version manager
       - yarn                    # Node.js package manager
@@ -67,6 +67,7 @@
 
 - name: uninstall homebrew packages
   community.general.homebrew:
-    name: []
+    name:
+      - tmux
     state: absent
   ignore_errors: true
