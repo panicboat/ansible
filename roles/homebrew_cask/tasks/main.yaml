@@ -3,6 +3,11 @@
     upgrade_all: true
   ignore_errors: true
 
+# - name: Add clicklight tap
+#   community.general.homebrew_tap:
+#     name: aurorascharff/clicklight
+#     url: https://github.com/aurorascharff/ClickLight
+
 - name: Add cmux tap
   community.general.homebrew_tap:
     name: manaflow-ai/cmux
@@ -14,10 +19,10 @@
       - 1password
       - claude
       - claude-code
+      # - aurorascharff/clicklight/clicklight
       - clipy
       - cmux
       # - codex
-      # - ghostty
       - github
       - google-chrome
       - google-cloud-sdk
@@ -30,6 +35,7 @@
   community.general.homebrew_cask:
     name:
       - cheatsheet
+      - codex
       - ghostty
       - iterm2
     state: absent

@@ -1,5 +1,5 @@
 - name: Install Node.js via nodenv
-  ansible.builtin.command: nodenv install --skip-existing 22.11.0
+  ansible.builtin.command: nodenv install --skip-existing 26.1.0
   register: nodenv_install
   changed_when: "'Installed' in nodenv_install.stdout"
 
@@ -9,8 +9,8 @@
   changed_when: false
 
 - name: Set global Node.js version
-  ansible.builtin.command: nodenv global 22.11.0
-  when: nodenv_global.stdout != "22.11.0"
+  ansible.builtin.command: nodenv global 26.1.0
+  when: nodenv_global.stdout != "26.1.0"
 
 - name: Install npm global packages
   community.general.npm:
