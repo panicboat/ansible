@@ -3,10 +3,10 @@
     upgrade_all: true
   ignore_errors: true
 
-# - name: Add clicklight tap
-#   community.general.homebrew_tap:
-#     name: aurorascharff/clicklight
-#     url: https://github.com/aurorascharff/ClickLight
+- name: Add clicklight tap
+  community.general.homebrew_tap:
+    name: aurorascharff/clicklight
+    url: https://github.com/aurorascharff/ClickLight
 
 - name: Add cmux tap
   community.general.homebrew_tap:
@@ -19,7 +19,7 @@
       - 1password
       - claude
       - claude-code
-      # - aurorascharff/clicklight/clicklight
+      - aurorascharff/clicklight/clicklight
       - clipy
       - cmux
       # - codex
