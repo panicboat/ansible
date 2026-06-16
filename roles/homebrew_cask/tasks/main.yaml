@@ -17,6 +17,7 @@
   community.general.homebrew_cask:
     name:
       - 1password
+      - brave-browser
       - claude
       - claude-code
       - aurorascharff/clicklight/clicklight
