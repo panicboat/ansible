@@ -28,13 +28,14 @@
   community.general.homebrew_cask:
     name:
       - 1password
+      - antigravity-cli
       - brave-browser
       - claude
       - claude-code
       - aurorascharff/clicklight/clicklight
       - clipy
       - cmux
-      # - codex
+      - codex
       - github
       - google-chrome
       - google-cloud-sdk
@@ -47,7 +48,6 @@
   community.general.homebrew_cask:
     name:
       - cheatsheet
-      - codex
       - ghostty
       - iterm2
     state: absent
