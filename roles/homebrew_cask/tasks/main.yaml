@@ -3,14 +3,25 @@
     upgrade_all: true
   ignore_errors: true
 
-- name: Add clicklight tap
-  community.general.homebrew_tap:
-    name: aurorascharff/clicklight
-    url: https://github.com/aurorascharff/ClickLight
+- name: define homebrew cask taps
+  ansible.builtin.set_fact:
+    homebrew_cask_taps:
+      - name: aurorascharff/clicklight
+        url: https://github.com/aurorascharff/ClickLight
+      - name: manaflow-ai/cmux
 
-- name: Add cmux tap
+- name: add homebrew cask taps
   community.general.homebrew_tap:
-    name: manaflow-ai/cmux
+    name: "{{ item.name }}"
+    url: "{{ item.url | default(omit) }}"
+  loop: "{{ homebrew_cask_taps }}"
+
+- name: trust homebrew cask taps
+  ansible.builtin.command:
+    cmd: "brew trust {{ item.name }}"
+  loop: "{{ homebrew_cask_taps }}"
+  # register: brew_trust_check
+  # changed_when: "'Trusted' in brew_trust_check.stdout or brew_trust_check.rc == 0"
 
   # https://formulae.brew.sh/cask/
 - name: install homebrew cask packages
