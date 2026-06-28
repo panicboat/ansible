@@ -21,7 +21,7 @@
 
 - name: trust homebrew taps
   ansible.builtin.command:
-    cmd: "brew trust {{ item.name }}"
+    cmd: "brew trust --tap {{ item.name }}"
   loop: "{{ homebrew_taps }}"
   # register: brew_trust_check
   # changed_when: "'Trusted' in brew_trust_check.stdout or brew_trust_check.rc == 0"
