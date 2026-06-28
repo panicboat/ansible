@@ -8,9 +8,23 @@
     upgrade_all: true
   ignore_errors: true
 
-- name: Add fluxcd tap
+- name: define homebrew taps
+  ansible.builtin.set_fact:
+    homebrew_taps:
+      - name: fluxcd/tap
+
+- name: add homebrew taps
   community.general.homebrew_tap:
-    name: fluxcd/tap
+    name: "{{ item.name }}"
+    url: "{{ item.url | default(omit) }}"
+  loop: "{{ homebrew_taps }}"
+
+- name: trust homebrew taps
+  ansible.builtin.command:
+    cmd: "brew trust --tap {{ item.name }}"
+  loop: "{{ homebrew_taps }}"
+  # register: brew_trust_check
+  # changed_when: "'Trusted' in brew_trust_check.stdout or brew_trust_check.rc == 0"
 
 - name: install homebrew packages
   community.general.homebrew:
