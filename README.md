@@ -30,5 +30,6 @@ ansible-galaxy install -r requirements.yaml
 deploy playbook
 
 ```sh
+export HOMEBREW_NO_REQUIRE_TAP_TRUST=1
 ansible-playbook playbook.yaml -i inventory.ini
 ```
