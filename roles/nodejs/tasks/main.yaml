@@ -12,8 +12,21 @@
   ansible.builtin.command: nodenv global 26.1.0
   when: nodenv_global.stdout != "26.1.0"
 
+# @evenrealities/even-terminal is Even Realities' AI coding CLI (smart glasses /
+# Flutter app), a standard npm-distributed command, so a global install exposes
+# the even-terminal binary directly.
 - name: Install npm global packages
   community.general.npm:
     name: "@evenrealities/even-terminal"
     global: true
     executable: "{{ lookup('env', 'HOME') }}/.nodenv/shims/npm"
+
+# agmsg is an npm bootstrapper that fetches and runs a bash installer, so a
+# global npm install would only place the wrapper — not the runtime under
+# ~/.agents/skills/agmsg/. Run the installer instead. --yes skips the npx
+# install prompt, --cmd agmsg makes install.sh non-interactive; the installer
+# touches .agmsg last, so it serves as the creates guard.
+- name: Install agmsg cross-agent messaging
+  ansible.builtin.command: "{{ lookup('env', 'HOME') }}/.nodenv/shims/npx --yes agmsg install --cmd agmsg"
+  args:
+    creates: "{{ lookup('env', 'HOME') }}/.agents/skills/agmsg/.agmsg"
