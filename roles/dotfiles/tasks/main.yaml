@@ -15,7 +15,7 @@
 
 - name: Find all dotfiles
   ansible.builtin.shell: >
-    cd {{ dotfiles_repo_local_destination }} && find . -type f
+    cd {{ dotfiles_repo_local_destination }} && find . \( -type f -o -type l \)
     -not -path '*/\.git/*'
     {% for exclude in dotfiles_exclude %}
     -not -name {{ exclude | quote }}
