@@ -29,7 +29,7 @@
     name:
       - 1password
       - antigravity-cli
-      - brave-browser
+      # - brave-browser
       - claude
       - claude-code
       - aurorascharff/clicklight/clicklight
@@ -37,7 +37,7 @@
       - cmux
       - codex
       - github
-      - google-chrome
+      # - google-chrome
       - google-cloud-sdk
       # - logi-options+
       - raycast
