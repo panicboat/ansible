@@ -9,6 +9,7 @@
       - name: aurorascharff/clicklight
         url: https://github.com/aurorascharff/ClickLight
       - name: manaflow-ai/cmux
+      - name: fujibee/agmsg
 
 - name: add homebrew cask taps
   community.general.homebrew_tap:
@@ -28,6 +29,7 @@
   community.general.homebrew_cask:
     name:
       - 1password
+      - agmsg
       - antigravity-cli
       # - brave-browser
       - claude
