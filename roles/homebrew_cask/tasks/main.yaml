@@ -32,6 +32,7 @@
       - agmsg
       - antigravity-cli
       # - brave-browser
+      - chatgpt
       - claude
       - claude-code
       - aurorascharff/clicklight/clicklight
