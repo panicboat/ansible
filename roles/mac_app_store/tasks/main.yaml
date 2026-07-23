@@ -1,11 +1,11 @@
-- name: upgrade applications from app store
-  community.general.mas:
-    upgrade_all: true
-  ignore_errors: true
+# - name: upgrade applications from app store
+#   community.general.mas:
+#     upgrade_all: true
+#   ignore_errors: true
 
 - name: install applications from app store
   community.general.mas:
     id:
-      - 441258766  # Magnet
-      - 1429033973 # RunCat
       - 425424353  # The Unarchiver
+      - 441258766  # Magnet
+      - 6757801838 # RunCat Neo
