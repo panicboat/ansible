@@ -58,6 +58,7 @@
       - peco                    # Interactive filtering tool
       - pnpm                    # Fast, disk-efficient Node.js package manager
       - postgresql              # Relational database
+      - pre-commit              # Framework for managing and maintaining multi-language pre-commit hooks
       - pyenv                   # Python version manager
       - shellcheck              # Static analysis tool for shell scripts
       - starship                # Cross-shell prompt customization tool

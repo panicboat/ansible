@@ -9,3 +9,8 @@
       - 425424353  # The Unarchiver
       - 441258766  # Magnet
       - 6757801838 # RunCat Neo
+  register: mas_install
+  retries: 3
+  delay: 10
+  until: mas_install is succeeded
+  ignore_errors: true
