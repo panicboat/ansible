@@ -80,6 +80,11 @@
   command: brew link --overwrite tfenv
   changed_when: false
 
+- name: install herdr codex integration
+  ansible.builtin.command:
+    cmd: herdr integration install codex
+  changed_when: false
+
 - name: uninstall homebrew packages
   community.general.homebrew:
     name:
