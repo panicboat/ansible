@@ -63,6 +63,7 @@
       - shellcheck              # Static analysis tool for shell scripts
       - starship                # Cross-shell prompt customization tool
       - tfenv                   # Terraform version manager
+      - tmux                    # Terminal multiplexer (required by agmsg-driven-development for spawn/despawn)
       - trash-cli               # Move files to trash instead of deleting
       - rbenv                   # Ruby version manager
       - yarn                    # Node.js package manager
@@ -82,7 +83,6 @@
 - name: uninstall homebrew packages
   community.general.homebrew:
     name:
-      - tmux
       - gemini-cli
     state: absent
   ignore_errors: true
