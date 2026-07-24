@@ -45,6 +45,7 @@
       - git                     # Version control system
       - goenv                   # Go version manager
       - helm                    # Kubernetes package manager
+      - herdr                   # Agent multiplexer (required by agmsg-driven-development to spawn/drive Codex)
       - helmfile                # Declarative Helm chart deployment manager
       - jnv                     # Interactive JSON viewer and filter
       - jq                      # Command-line JSON processor
@@ -77,6 +78,11 @@
 
 - name: link tfenv
   command: brew link --overwrite tfenv
+  changed_when: false
+
+- name: install herdr codex integration
+  ansible.builtin.command:
+    cmd: herdr integration install codex
   changed_when: false
 
 - name: uninstall homebrew packages
