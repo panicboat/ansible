@@ -31,11 +31,11 @@
       - 1password
       - agmsg
       - antigravity-cli
+      - aurorascharff/clicklight/clicklight
       # - brave-browser
       - chatgpt
       - claude
       - claude-code
-      - aurorascharff/clicklight/clicklight
       - clipy
       - cmux
       - codex
@@ -43,9 +43,9 @@
       # - google-chrome
       - google-cloud-sdk
       - keyclu
-      # - logi-options+
       - raycast
       - slack
+      - steipete/tap/codexbar
       - visual-studio-code
     # auto_updates cask (browsers etc.) drifts from Homebrew's records via
     # the app's built-in updater; adopt reconciles instead of failing.
