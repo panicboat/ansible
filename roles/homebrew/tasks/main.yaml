@@ -45,7 +45,7 @@
       - git                     # Version control system
       - goenv                   # Go version manager
       - helm                    # Kubernetes package manager
-      - herdr                   # Agent multiplexer (required by agmsg-driven-development to spawn/drive Codex)
+      - herdr                   # Agent multiplexer
       - helmfile                # Declarative Helm chart deployment manager
       - jnv                     # Interactive JSON viewer and filter
       - jq                      # Command-line JSON processor
