@@ -80,6 +80,10 @@
   command: brew link --overwrite tfenv
   changed_when: false
 
+- name: link postgresql
+  command: brew link --overwrite postgresql
+  changed_when: false
+
 - name: install herdr codex integration
   ansible.builtin.command:
     cmd: herdr integration install codex
