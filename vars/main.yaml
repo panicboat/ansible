@@ -5,5 +5,8 @@ dotfiles_repo_local_destination: "~/GitHub/panicboat/dotfiles"
 dotfiles_exclude:
   - README.md
   - LICENSE
+  - .aws/config
+  - .gitignore
+  - .pre-commit-config.yaml
 dotfiles_executable_dirs:
   - .claude/scripts
