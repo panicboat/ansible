@@ -16,5 +16,5 @@ launchd_jobs:
   - label: com.panicboat.homebrew-upgrade
     command: brew update && brew upgrade && brew upgrade --cask && brew cleanup && brew autoremove
     weekday: 1
-    hour: 8
+    hour: 7
     minute: 0
