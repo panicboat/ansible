@@ -10,3 +10,11 @@ dotfiles_exclude:
   - .pre-commit-config.yaml
 dotfiles_executable_dirs:
   - .claude/scripts
+
+launchd_jobs:
+  # Weekly Homebrew maintenance: keep formulae/casks up to date and prune old versions
+  - label: com.panicboat.homebrew-upgrade
+    command: brew update && brew upgrade && brew upgrade --cask && brew cleanup && brew autoremove
+    weekday: 1
+    hour: 7
+    minute: 0

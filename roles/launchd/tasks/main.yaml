@@ -1,0 +1,24 @@
+- name: ensure LaunchAgents directory exists
+  ansible.builtin.file:
+    path: "~/Library/LaunchAgents"
+    state: directory
+    mode: "0755"
+
+- name: deploy launchd job definitions
+  ansible.builtin.template:
+    src: job.plist.j2
+    dest: "~/Library/LaunchAgents/{{ item.label }}.plist"
+    mode: "0644"
+  loop: "{{ launchd_jobs }}"
+  loop_control:
+    label: "{{ item.label }}"
+  register: launchd_plist_result
+
+- name: reload launchd job definitions
+  community.general.launchd:
+    name: "{{ item.item.label }}"
+    state: reloaded
+  loop: "{{ launchd_plist_result.results }}"
+  loop_control:
+    label: "{{ item.item.label }}"
+  when: item.changed
