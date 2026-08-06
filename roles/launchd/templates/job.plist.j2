@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Label</key>
+	<string>{{ item.label }}</string>
+	<key>ProgramArguments</key>
+	<array>
+		<string>/bin/zsh</string>
+		<string>-lc</string>
+		<string>{{ item.command | e }}</string>
+	</array>
+	<key>StartCalendarInterval</key>
+	<dict>
+		<key>Weekday</key>
+		<integer>{{ item.weekday }}</integer>
+		<key>Hour</key>
+		<integer>{{ item.hour }}</integer>
+		<key>Minute</key>
+		<integer>{{ item.minute }}</integer>
+	</dict>
+	<key>StandardOutPath</key>
+	<string>{{ lookup('env', 'HOME') }}/Library/Logs/{{ item.label }}.log</string>
+	<key>StandardErrorPath</key>
+	<string>{{ lookup('env', 'HOME') }}/Library/Logs/{{ item.label }}.log</string>
+	<key>RunAtLoad</key>
+	<false/>
+</dict>
+</plist>
