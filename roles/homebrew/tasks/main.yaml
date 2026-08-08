@@ -55,6 +55,7 @@
       - kustomize               # Kubernetes manifest customization tool
       - mas                     # Mac App Store CLI
       - nodenv                  # Node.js version manager
+      - okteto                  # Develop and test code directly in Kubernetes
       - opentofu                # Open-source Terraform-compatible IaC tool
       - peco                    # Interactive filtering tool
       - pnpm                    # Fast, disk-efficient Node.js package manager
