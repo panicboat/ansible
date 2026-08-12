@@ -51,10 +51,6 @@
 - name: install homebrew cask packages
   community.general.homebrew_cask:
     name: "{{ homebrew_cask_list }}"
-    # auto_updates cask (browsers etc.) drifts from Homebrew's records via
-    # the app's built-in updater; adopt reconciles instead of failing.
-    install_options:
-      - adopt
 
 - name: uninstall homebrew cask packages
   community.general.homebrew_cask:
