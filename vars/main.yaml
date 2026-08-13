@@ -6,6 +6,7 @@ dotfiles_exclude:
   - README.md
   - LICENSE
   - .aws/config
+  - .claude/worktrees
   - .gitignore
   - .pre-commit-config.yaml
 dotfiles_executable_dirs:
