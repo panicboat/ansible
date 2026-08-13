@@ -24,10 +24,9 @@
   # register: brew_trust_check
   # changed_when: "'Trusted' in brew_trust_check.stdout or brew_trust_check.rc == 0"
 
-  # https://formulae.brew.sh/cask/
-- name: install homebrew cask packages
-  community.general.homebrew_cask:
-    name:
+- name: define homebrew cask packages
+  ansible.builtin.set_fact:
+    homebrew_cask_list:
       - 1password
       - agmsg
       - antigravity-cli
@@ -47,10 +46,29 @@
       - slack
       - steipete/tap/codexbar
       - visual-studio-code
-    # auto_updates cask (browsers etc.) drifts from Homebrew's records via
-    # the app's built-in updater; adopt reconciles instead of failing.
-    install_options:
-      - adopt
+
+- name: detect and repair missing cask artifacts
+  ansible.builtin.shell:
+    cmd: |
+      set -e
+      cask="{{ item }}"
+      short="${cask##*/}"
+      caskroom="/opt/homebrew/Caskroom/$short"
+      [ -d "$caskroom" ] || exit 0
+      # resolve alias (e.g. google-cloud-sdk -> gcloud-cli) so find descends into the real Caskroom dir
+      caskroom=$(cd -P "$caskroom" 2>/dev/null && pwd) || exit 0
+      if find "$caskroom" -type l ! -exec test -e {} \; -print | grep -q .; then
+        brew reinstall --cask "$cask"
+        echo REPAIRED
+      fi
+  loop: "{{ homebrew_cask_list }}"
+  register: homebrew_cask_repair
+  changed_when: "'REPAIRED' in homebrew_cask_repair.stdout"
+
+  # https://formulae.brew.sh/cask/
+- name: install homebrew cask packages
+  community.general.homebrew_cask:
+    name: "{{ homebrew_cask_list }}"
 
 - name: uninstall homebrew cask packages
   community.general.homebrew_cask:
