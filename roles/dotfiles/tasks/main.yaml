@@ -15,11 +15,16 @@
 
 - name: Find all dotfiles
   ansible.builtin.shell: >
-    cd {{ dotfiles_repo_local_destination }} && find . \( -type f -o -type l \)
-    -not -path '*/\.git/*'
+    cd {{ dotfiles_repo_local_destination }} && find .
+    -path '*/\.git/*' -prune -o
     {% for exclude in dotfiles_exclude %}
-    -not -name {{ exclude | quote }}
+    {% if '/' in exclude %}
+    -path {{ ('./' ~ exclude) | quote }} -prune -o
+    {% else %}
+    -name {{ exclude | quote }} -prune -o
+    {% endif %}
     {% endfor %}
+    \( -type f -o -type l \) -print
     | sed 's|^\./||'
   register: dotfiles_found
   changed_when: false
