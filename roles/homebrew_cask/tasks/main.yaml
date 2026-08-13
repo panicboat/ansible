@@ -55,6 +55,8 @@
       short="${cask##*/}"
       caskroom="/opt/homebrew/Caskroom/$short"
       [ -d "$caskroom" ] || exit 0
+      # resolve alias (e.g. google-cloud-sdk -> gcloud-cli) so find descends into the real Caskroom dir
+      caskroom=$(cd -P "$caskroom" 2>/dev/null && pwd) || exit 0
       if find "$caskroom" -type l ! -exec test -e {} \; -print | grep -q .; then
         brew reinstall --cask "$cask"
         echo REPAIRED
