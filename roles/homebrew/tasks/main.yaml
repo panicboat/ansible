@@ -12,6 +12,7 @@
   ansible.builtin.set_fact:
     homebrew_taps:
       - name: fluxcd/tap
+      - name: stripe/stripe-cli
 
 - name: add homebrew taps
   community.general.homebrew_tap:
@@ -64,6 +65,7 @@
       - pyenv                   # Python version manager
       - shellcheck              # Static analysis tool for shell scripts
       - starship                # Cross-shell prompt customization tool
+      - stripe/stripe-cli/stripe # Stripe command-line interface
       - tfenv                   # Terraform version manager
       - trash-cli               # Move files to trash instead of deleting
       - rbenv                   # Ruby version manager
