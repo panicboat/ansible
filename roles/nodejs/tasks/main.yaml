@@ -30,20 +30,3 @@
   ansible.builtin.command: "{{ lookup('env', 'HOME') }}/.nodenv/shims/npx --yes agmsg install --cmd agmsg"
   args:
     creates: "{{ lookup('env', 'HOME') }}/.agents/skills/agmsg/.agmsg"
-
-# archify is distributed as an agent skill via the `skills` CLI, not as a
-# standalone binary, so a global npm install would not place it under the
-# per-agent skills directory. --copy materializes the tree instead of
-# symlinking a cache path, so the install survives npx cache eviction.
-# Claude Code and the codex/antigravity-cli shared tree live in different
-# roots, so they are installed separately with the SKILL.md file as the
-# creates guard.
-- name: Install archify skill (Claude Code)
-  ansible.builtin.command: "{{ lookup('env', 'HOME') }}/.nodenv/shims/npx --yes skills add tt-a1i/archify --agent claude-code --global --copy --yes"
-  args:
-    creates: "{{ lookup('env', 'HOME') }}/.claude/skills/archify/SKILL.md"
-
-- name: Install archify skill (Codex / Antigravity CLI)
-  ansible.builtin.command: "{{ lookup('env', 'HOME') }}/.nodenv/shims/npx --yes skills add tt-a1i/archify --agent codex --agent antigravity-cli --global --copy --yes"
-  args:
-    creates: "{{ lookup('env', 'HOME') }}/.agents/skills/archify/SKILL.md"
