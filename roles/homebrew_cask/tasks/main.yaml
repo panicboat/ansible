@@ -8,8 +8,8 @@
     homebrew_cask_taps:
       - name: aurorascharff/clicklight
         url: https://github.com/aurorascharff/ClickLight
-      - name: manaflow-ai/cmux
       - name: fujibee/agmsg
+      - name: manaflow-ai/cmux
 
 - name: add homebrew cask taps
   community.general.homebrew_tap:
@@ -44,6 +44,7 @@
       - keyclu
       - raycast
       - slack
+      - stablyai/orca/orca
       - steipete/tap/codexbar
       - visual-studio-code
 
