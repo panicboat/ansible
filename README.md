@@ -21,12 +21,6 @@ edit inventory.ini
 cp inventory.ini.example inventory.ini
 ```
 
-install plugin
-
-```sh
-ansible-galaxy install -r requirements.yaml
-```
-
 deploy playbook
 
 ```sh

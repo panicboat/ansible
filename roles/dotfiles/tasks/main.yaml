@@ -1,10 +1,31 @@
 ---
-- name: Clone or update dotfiles repository
+- name: Check whether the dotfiles repository already exists locally
+  ansible.builtin.stat:
+    path: "{{ dotfiles_repo_local_destination }}/.git"
+  register: dotfiles_repo_git_dir
+
+- name: Clone dotfiles repository
   ansible.builtin.git:
     repo: "{{ dotfiles_repo }}"
     dest: "{{ dotfiles_repo_local_destination }}"
     version: "{{ dotfiles_repo_version }}"
     accept_hostkey: true
+  become: false
+  when: not dotfiles_repo_git_dir.stat.exists
+
+# The destination is the user's real working copy of their dotfiles, not a
+# disposable mirror, so pulling must never discard uncommitted local edits
+# (ansible.builtin.git's checkout-based update fails outright when dirty).
+# Rebase incoming commits and replay local changes on top instead; a genuine
+# conflict still fails the task, which is the correct outcome.
+- name: Sync existing dotfiles repository without discarding local changes
+  ansible.builtin.command: git pull --rebase --autostash
+  args:
+    chdir: "{{ dotfiles_repo_local_destination }}"
+  register: dotfiles_repo_pull
+  changed_when: "'Already up to date' not in dotfiles_repo_pull.stdout"
+  become: false
+  when: dotfiles_repo_git_dir.stat.exists
 
 - name: Ignore file mode changes in dotfiles repository
   community.general.git_config:
@@ -31,7 +52,7 @@
 
 - name: Create parent directories
   ansible.builtin.file:
-    path: "~/{{ item | dirname }}"
+    path: "{{ dotfiles_home }}/{{ item | dirname }}"
     state: directory
   with_items: "{{ dotfiles_found.stdout_lines }}"
   when: item | dirname | length > 0
@@ -55,3 +76,26 @@
   loop: "{{ dotfiles_executable_found.results | map(attribute='files') | flatten }}"
   loop_control:
     label: "{{ item.path }}"
+
+- name: Ensure all configured dotfiles are links
+  ansible.builtin.command: "ls -F {{ dotfiles_home }}/{{ item }}"
+  register: existing_dotfile_info
+  failed_when: false
+  check_mode: false
+  changed_when: false
+  with_items: "{{ dotfiles_files }}"
+
+- name: Remove existing dotfiles file if a replacement is being linked
+  ansible.builtin.file:
+    path: "{{ dotfiles_home }}/{{ dotfiles_files[item.0] }}"
+    state: absent
+  when: "'@' not in item.1.stdout"
+  with_indexed_items: "{{ existing_dotfile_info.results }}"
+
+- name: Link dotfiles into home folder
+  ansible.builtin.file:
+    src: "{{ dotfiles_repo_local_destination }}/{{ item }}"
+    dest: "{{ dotfiles_home }}/{{ item }}"
+    state: link
+  become: false
+  with_items: "{{ dotfiles_files }}"
