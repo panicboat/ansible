@@ -7,6 +7,15 @@
   vars_files:
     - vars/main.yaml
 
+  # roles/dotfiles already syncs dotfiles_repo_local_destination without
+  # discarding local edits (see its tasks). geerlingguy.dotfiles runs its
+  # own independent ansible.builtin.git clone/update against the same
+  # destination and would otherwise fail whenever it has local
+  # modifications, so its update is disabled here.
+  module_defaults:
+    ansible.builtin.git:
+      update: false
+
   roles:
     - dotfiles
     - geerlingguy.dotfiles
