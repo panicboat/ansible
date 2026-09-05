@@ -2,7 +2,6 @@
 dotfiles_repo: "git@github.com:panicboat/dotfiles.git"
 dotfiles_repo_version: main
 dotfiles_repo_local_destination: "~/GitHub/panicboat/dotfiles"
-dotfiles_home: "~"
 dotfiles_exclude:
   - README.md
   - LICENSE

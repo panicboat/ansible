@@ -15,8 +15,6 @@ class DotfilesExcludeTest(unittest.TestCase):
             temporary_path = Path(temporary_directory)
             source_repository = temporary_path / "source"
             destination_repository = temporary_path / "destination"
-            fake_home = temporary_path / "home"
-            fake_home.mkdir()
             source_repository.mkdir()
 
             for relative_path in (
@@ -59,7 +57,6 @@ class DotfilesExcludeTest(unittest.TestCase):
                         dotfiles_repo: {source_repository}
                         dotfiles_repo_version: HEAD
                         dotfiles_repo_local_destination: {destination_repository}
-                        dotfiles_home: {fake_home}
                         dotfiles_exclude:
                           - .aws/config
                           - .claude/worktrees
