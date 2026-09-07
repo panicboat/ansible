@@ -38,6 +38,7 @@
       - clipy
       - cmux
       - codex
+      - codex-app
       - github
       # - google-chrome
       - google-cloud-sdk
