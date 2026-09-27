@@ -63,6 +63,7 @@
       - postgresql              # Relational database
       - pre-commit              # Framework for managing and maintaining multi-language pre-commit hooks
       - pyenv                   # Python version manager
+      - rustup                  # Rust toolchain installer
       - shellcheck              # Static analysis tool for shell scripts
       - starship                # Cross-shell prompt customization tool
       - stripe/stripe-cli/stripe # Stripe command-line interface
