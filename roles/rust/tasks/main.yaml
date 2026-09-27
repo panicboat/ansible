@@ -1,0 +1,13 @@
+- name: Install stable Rust toolchain via rustup
+  ansible.builtin.command: rustup toolchain install stable
+  register: rustup_toolchain_install
+  changed_when: "'unchanged' not in rustup_toolchain_install.stdout"
+
+- name: Read current default Rust toolchain
+  ansible.builtin.command: rustup show active-toolchain
+  register: rustup_active_toolchain
+  changed_when: false
+
+- name: Set default Rust toolchain
+  ansible.builtin.command: rustup default stable
+  when: "'stable' not in rustup_active_toolchain.stdout"
