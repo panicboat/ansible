@@ -70,6 +70,7 @@
       - tfenv                   # Terraform version manager
       - trash-cli               # Move files to trash instead of deleting
       - rbenv                   # Ruby version manager
+      - vale                    # Prose linter for documentation
       - yarn                    # Node.js package manager
       - yq                      # Command-line YAML processor
       - zsh-autosuggestions     # Fish-like autosuggestions for zsh

@@ -22,3 +22,22 @@
   ansible.builtin.command: "{{ lookup('env', 'HOME') }}/.nodenv/shims/npx --yes agmsg install --cmd agmsg"
   args:
     creates: "{{ lookup('env', 'HOME') }}/.agents/skills/agmsg/.agmsg"
+
+- name: Install documentation linters
+  ansible.builtin.command: >-
+    {{ lookup('env', 'HOME') }}/.nodenv/shims/npm install --prefix {{ lookup('env', 'HOME') }}/.local/share/doc-lint
+    --ignore-scripts --no-audit --no-fund textlint@latest textlint-rule-preset-ja-technical-writing@latest
+  args:
+    creates: "{{ lookup('env', 'HOME') }}/.local/share/doc-lint/node_modules/.bin/textlint"
+
+- name: Create the Vale styles directory
+  ansible.builtin.file:
+    path: "{{ lookup('env', 'HOME') }}/.local/share/doc-lint/vale-styles"
+    state: directory
+
+- name: Install Vale style packages
+  ansible.builtin.command: /opt/homebrew/bin/vale --config {{ lookup('env', 'HOME') }}/.config/vale/.vale.ini sync
+  environment:
+    VALE_STYLES_PATH: "{{ lookup('env', 'HOME') }}/.local/share/doc-lint/vale-styles"
+  args:
+    creates: "{{ lookup('env', 'HOME') }}/.local/share/doc-lint/vale-styles/Google"

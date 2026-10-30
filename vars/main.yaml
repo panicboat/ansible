@@ -19,3 +19,10 @@ launchd_jobs:
     weekday: 1
     hour: 7
     minute: 0
+
+  # Weekly documentation linter refresh: follow upstream Vale styles and textlint rules
+  - label: com.panicboat.doc-lint-upgrade
+    command: VALE_STYLES_PATH="$HOME/.local/share/doc-lint/vale-styles" /opt/homebrew/bin/vale --config "$HOME/.config/vale/.vale.ini" sync && "$HOME/.nodenv/shims/npm" install --prefix "$HOME/.local/share/doc-lint" --ignore-scripts --no-audit --no-fund textlint@latest textlint-rule-preset-ja-technical-writing@latest
+    weekday: 1
+    hour: 7
+    minute: 30
