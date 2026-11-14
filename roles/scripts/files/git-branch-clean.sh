@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -eu
+shopt -s dotglob
 
 max_depth=2
 while [[ $# -gt 0 ]]; do
